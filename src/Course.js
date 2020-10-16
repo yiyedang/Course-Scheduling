@@ -103,6 +103,15 @@ class Course extends React.Component {
     )
   }
 
+  getTimes(time){
+		let times = []
+		for (const [key, value] of Object.entries(time)) {
+      let keyCap = key.charAt(0).toUpperCase() + key.slice(1)
+			times.push(<li key={key}>{keyCap}: {value}</li>)
+		}
+		return times;
+  }
+  
   getSections() {
     let sections = [];
 
@@ -111,12 +120,13 @@ class Course extends React.Component {
       sections.push (
           <Card key={i}>
             <Accordion.Toggle as={Card.Header} variant="link" eventKey={i} style={{height: 63, display: 'flex', alignItems: 'center'}}>
-              {"Section " + i}
+              {"Section " + (i + 1)}
               {this.getSectionButton(i)}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
               <Card.Body>
-                {JSON.stringify(this.props.data.sections[i].time)}
+                <h6>Times:</h6> 
+                {this.getTimes(this.props.data.sections[i].time)}
                 {this.getSubsections(i, this.props.data.sections[i])}
               </Card.Body>
             </Accordion.Collapse>
@@ -213,12 +223,13 @@ class Course extends React.Component {
     subsections.push (
         <Card key={i}>
           <Accordion.Toggle as={Card.Header} variant="link" eventKey={i} style={{height: 63, display: 'flex', alignItems: 'center'}}>
-            {i}
+            {i+1}
             {this.getSubsectionButton(sectionKey, i)}
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={i}>
             <Card.Body>
-              {JSON.stringify(sectionValue.subsections[i].time)}
+              <h6>Time:</h6> 
+              {this.getTimes(sectionValue.subsections[i].time)}
             </Card.Body>
           </Accordion.Collapse>
         </Card>

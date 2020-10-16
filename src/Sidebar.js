@@ -3,11 +3,13 @@ import './App.css';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import SearchAndFilter from './SearchAndFilter';
+import Alert from 'react-bootstrap/Alert';
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      rangeError: ''
     }
     this.searchAndFilter = new SearchAndFilter();
     this.subject = React.createRef();
@@ -18,10 +20,20 @@ class Sidebar extends React.Component {
   }
 
   setCourses() {
+    let error = false;
     if(this.subject.current != null && this.minimumCredits.current != null && this.maximumCredits.current != null && this.interest.current != null) {
-      this.props.setCourses(this.searchAndFilter.searchAndFilter(this.props.courses,this.search.current.value, this.subject.current.value, this.interest.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
-      this.props.getInterests(this.searchAndFilter.searchAndFilter(this.props.courses,this.search.current.value, this.subject.current.value, this.interest.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
-    }
+      if(this.minimumCredits.current.value.trim() !== '' && this.maximumCredits.current.value.trim() !== '')
+        if(this.minimumCredits.current.value > this.maximumCredits.current.value){
+          this.setState({rangeError: 'Minimum credit can not be greater than maximum'});
+          error = true;
+        } else {
+          this.setState({rangeError:  null});
+        }
+      }
+      if(!error){
+        this.props.setCourses(this.searchAndFilter.searchAndFilter(this.props.courses,this.search.current.value, this.subject.current.value, this.interest.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
+        this.props.getInterests(this.searchAndFilter.searchAndFilter(this.props.courses,this.search.current.value, this.subject.current.value, this.interest.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value));
+      }
   }
 
   handleCreditsKeyDown(e) {
@@ -49,7 +61,16 @@ class Sidebar extends React.Component {
     return interestOptions;
   }
 
-
+  getNumberOfCourses(){
+    if(this.subject.current != null && this.minimumCredits.current != null && this.maximumCredits.current != null && this.interest.current != null) {
+      let courses = this.searchAndFilter.searchAndFilter(this.props.courses,this.search.current.value, this.subject.current.value, this.interest.current.value, this.minimumCredits.current.value, this.maximumCredits.current.value);
+      return (
+      <Alert variant="info">
+        Number of search results: {courses.length}
+      </Alert>
+      );
+    }
+  }
 
   render() {
     return (
@@ -83,16 +104,21 @@ class Sidebar extends React.Component {
 
 
               <div style={{display: 'flex', flexDirection: 'row'}}>
-                <Form.Group controlId="minimumCredits" onChange={() => this.setCourses()} onKeyDown={(e) => this.handleCreditsKeyDown(e)}>
+                <Form.Group controlId="minimumCredits" onChange={() => this.setCourses()}>
                   <Form.Label>Credits</Form.Label>
                   <Form.Control type="text" placeholder="minimum" autoComplete="off" ref={this.minimumCredits}/>
                 </Form.Group>
                 <div style={{marginLeft: '5px', marginRight: '5px', marginTop: '38px'}}>to</div>
-                <Form.Group controlId="maximumCredits" style={{marginTop: '32px'}} onChange={() => this.setCourses()} onKeyDown={(e) => this.handleCreditsKeyDown(e)}>
+                <Form.Group controlId="maximumCredits" style={{marginTop: '32px'}} onChange={() => this.setCourses()}>
                   <Form.Control type="text" placeholder="maximum" autoComplete="off" ref={this.maximumCredits}/>
                 </Form.Group>
               </div>
+              <div style={{color: 'red'}}>{this.state.rangeError}</div>
             </Form>
+            <br></br>
+            <div>
+              {this.getNumberOfCourses()}
+            </div>
           </Card.Body>
         </Card>
       </>
