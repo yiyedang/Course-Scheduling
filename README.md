@@ -2,9 +2,8 @@
 
 This project is the first part of a course management application which uses a limited quantity of modified data from the UW Madison course information database.
 
-![Overview](https://github.com/yiyedang/Course-Scheduling/blob/master/Picture1.png)
-
-![Course](https://github.com/yiyedang/Course-Scheduling/blob/master/Picture2.png)
+![Overview](https://github.com/yiyedang/Course-Scheduling/blob/master/Overview.png)
+![Course](https://github.com/yiyedang/Course-Scheduling/blob/master/Course.png)
 
 ## Course Data
 
@@ -77,8 +76,8 @@ You will be graded on successfully displaying ALL content for each course. Note 
 - **(0.05 points)** Subsection Location
 - **(0.05 points)** Subsection Meeting Times (Weekdays + Times)
 
-### Example Course Display
-![Example Course Display](img/course-display-example.png)
+### Course Display Prototype
+![Picture1](https://github.com/yiyedang/Course-Scheduling/blob/master/Picture1.png)
 
 ## Problem 2 (1.5 points)
 
