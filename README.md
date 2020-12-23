@@ -1,6 +1,10 @@
 # Course Search
 
-This assignment is meant to introduce you to more features of JavaScript, along with showing how a React project works. Additionally, this will introduce you to the different features of React, e.g. states, props, more modularized components etc. This project will be the first of a two part React project in which you will further extend your course management application. This application uses a limited quantity of modified data from the UW Madison course information database.
+This project is the first part of a course management application which uses a limited quantity of modified data from the UW Madison course information database.
+
+![Picture1](https://github.com/yiyedang/CourseSearch/blob/master/Picture1.png)
+
+![Picture2](https://github.com/yiyedang/CourseSearch/blob/master/Picture2.png)
 
 ## Course Data
 
