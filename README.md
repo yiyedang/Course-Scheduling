@@ -2,9 +2,9 @@
 
 This project is the first part of a course management application which uses a limited quantity of modified data from the UW Madison course information database.
 
-![Picture1](https://github.com/yiyedang/CourseSearch/blob/master/Picture1.png)
+![Overview](https://github.com/yiyedang/Course-Scheduling/blob/master/Picture1.png)
 
-![Picture2](https://github.com/yiyedang/CourseSearch/blob/master/Picture2.png)
+![Course](https://github.com/yiyedang/Course-Scheduling/blob/master/Picture2.png)
 
 ## Course Data
 
